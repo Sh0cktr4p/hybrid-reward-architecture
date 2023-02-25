@@ -16,7 +16,6 @@ from stable_baselines3.common.type_aliases import ReplayBufferSamples, Schedule
 from stable_baselines3.common.utils import polyak_update
 from stable_baselines3.common.vec_env import DummyVecEnv, VecEnvWrapper
 from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.utils import safe_mean
 
 try:
@@ -269,7 +268,7 @@ class HRASAC(SAC):
 
                 next_q_values, _ = th.min(next_q_values, dim=-1, keepdim=True)
                 # add entropy term
-                next_q_values -= ent_coef * next_log_prob.reshape(-1, 1, 1)
+                next_q_values -= ent_coef * next_log_prob.reshape(-1, 1, 1) / self.n_reward_signals
                 # td error + entropy term
                 # Shape: (batch, n_reward_signals, 1)
                 target_q_values = (
