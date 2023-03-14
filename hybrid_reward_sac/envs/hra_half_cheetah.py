@@ -1,17 +1,15 @@
 import numpy as np
 
-from gym.envs.mujoco.ant_v3 import AntEnv
+from gym.envs.mujoco.half_cheetah_v3 import HalfCheetahEnv
 
 
-class HRAAnt(AntEnv):
+class HRAHalfCheetah(HalfCheetahEnv):
     def step(self, action):
         observation, reward, done, info = super().step(action)
         info["hra_rew"] = np.array(
             [
-                info["reward_forward"],
+                info["reward_run"],
                 info["reward_ctrl"],
-                info["reward_contact"],
-                info["reward_survive"],
             ],
             dtype=np.float64,
         )
