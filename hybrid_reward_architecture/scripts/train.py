@@ -1,7 +1,6 @@
 from typing import List, Optional, Type
 
 import gym
-from gym.wrappers import TimeLimit
 import wandb
 
 from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
@@ -34,17 +33,20 @@ def train(
 
     def env_fn():
         env = gym.make(env_id)
-        env = TimeLimit(env=env, max_steps=200)
         env = Monitor(env=env, info_keywords=info_keys)
+        return env
 
     n_reward_signals = get_n_reward_signals(env_id)
 
-    VecEnvCls = VecHRAReward if n_reward_signals == 1 else DummyVecEnv
-    vec_env = VecEnvCls([env_fn for _ in range(n_envs)])
+    vec_env = DummyVecEnv([env_fn for _ in range(n_envs)])
+
+    if n_reward_signals > 1:
+        vec_env = VecHRAReward(vec_env)
 
     algorithm_kwargs = dict(
         policy="MlpPolicy",
         env=vec_env,
+        train_freq=(100, "step"),
         verbose=1,
         tensorboard_log=f"{runs_save_path}/{run.id}",
     )
@@ -125,7 +127,7 @@ if __name__ == '__main__':
 
     train(
         Algorithm=get_algorithm_by_str(args.alg),
-        Env=args.env,
+        env_id=args.env,
         project_name=args.project_name,
         info_keys=get_info_keys_by_env_str(args.env),
         n_timesteps=args.n_steps,

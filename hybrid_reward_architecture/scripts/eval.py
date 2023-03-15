@@ -21,7 +21,6 @@ def eval(
     n_episodes: int = 10,
 ):
     env = gym.make(env_id)
-    env = TimeLimit(env, max_episode_steps=200)
     model = Algorithm.load(f"{model_save_path}/{key}/model.zip", env=env)
 
     assert env is not None, "No environment stored with model"
