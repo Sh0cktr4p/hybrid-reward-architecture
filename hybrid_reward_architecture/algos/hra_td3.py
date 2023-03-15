@@ -6,9 +6,11 @@ import torch as th
 
 from stable_baselines3.common.type_aliases import GymEnv, Schedule
 from stable_baselines3.common.noise import ActionNoise
-from stable_baselines3.td3 import TD3, TD3Policy
+from stable_baselines3.td3 import TD3
+from stable_baselines3.td3.policies import TD3Policy
 from stable_baselines3.common.utils import polyak_update
-from ..common import HRAReplayBuffer
+
+from hybrid_reward_architecture.common import HRAReplayBuffer
 
 
 class HRATD3(TD3):

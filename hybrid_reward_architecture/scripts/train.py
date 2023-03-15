@@ -12,10 +12,11 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3 import SAC, TD3
 
-from hybrid_reward_sac.wrappers.vec_hra_reward import VecHRAReward
-from hybrid_reward_sac.callbacks import LogCallback
-from hybrid_reward_sac.algos import HRASAC, HRATD3
-from hybrid_reward_sac.envs import HRAAnt, HRAHumanoid, HRAHalfCheetah
+from hybrid_reward_architecture import runs_save_path
+from hybrid_reward_architecture.wrappers.vec_hra_reward import VecHRAReward
+from hybrid_reward_architecture.callbacks import LogCallback
+from hybrid_reward_architecture.algos import HRASAC, HRATD3
+from hybrid_reward_architecture.envs import HRAAnt, HRAHumanoid, HRAHalfCheetah
 
 
 def train(
@@ -41,12 +42,12 @@ def train(
         "MlpPolicy",
         vec_env,
         verbose=1,
-        tensorboard_log=f"runs/{run.id}",
+        tensorboard_log=f"{runs_save_path}/{run.id}",
     ) if n_reward_signals == 1 else Algorithm(
         "MlpPolicy",
         vec_env,
         verbose=1,
-        tensorboard_log=f"runs/{run.id}",
+        tensorboard_log=f"{runs_save_path}/{run.id}",
         n_reward_signals=n_reward_signals
     )
 
