@@ -4,6 +4,8 @@ from gym.envs.mujoco.ant_v3 import AntEnv
 
 
 class HRAAnt(AntEnv):
+    n_reward_signals = 4
+
     def step(self, action):
         observation, reward, done, info = super().step(action)
         info["hra_rew"] = np.array(

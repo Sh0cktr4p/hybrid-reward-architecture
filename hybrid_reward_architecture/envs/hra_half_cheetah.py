@@ -4,6 +4,8 @@ from gym.envs.mujoco.half_cheetah_v3 import HalfCheetahEnv
 
 
 class HRAHalfCheetah(HalfCheetahEnv):
+    n_reward_signals = 2
+
     def step(self, action):
         observation, reward, done, info = super().step(action)
         info["hra_rew"] = np.array(
