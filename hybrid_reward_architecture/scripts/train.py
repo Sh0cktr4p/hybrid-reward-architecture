@@ -47,7 +47,7 @@ def train(
         policy="MlpPolicy",
         env=vec_env,
         train_freq=(100, "step"),
-        verbose=1,
+        verbose=0,
         tensorboard_log=f"{runs_save_path}/{run.id}",
     )
 
