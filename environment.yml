@@ -1,0 +1,11 @@
+name: hra
+channels:
+  - conda-forge
+dependencies:
+  - pip>=22.0.4
+  - python=3.8
+  - setuptools==65.5.0
+  - pip:
+    - numpy
+    - gym[all]==0.21.0
+    - stable-baselines3==1.7.0

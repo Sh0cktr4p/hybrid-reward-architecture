@@ -2,7 +2,6 @@ from typing import Optional, Type
 import argparse
 
 import gym
-from gym.wrappers import TimeLimit
 
 from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
 from stable_baselines3.common.evaluation import evaluate_policy

@@ -1,0 +1,68 @@
+# TODO check this out
+# https://pythonspeed.com/articles/conda-docker-image-size/
+ARG MODE=user
+
+FROM continuumio/miniconda3 as base
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update -y && \
+    apt-get dist-upgrade -y && \
+    apt-get autoremove -y && \
+    apt-get install --no-install-recommends -y \
+        vim \
+        curl \
+        unzip \
+        swig \
+        gcc \
+        g++ \
+        libosmesa6-dev \
+        libgl1-mesa-glx \
+        libglfw3 \
+        patchelf
+
+FROM base as branch-user
+
+ARG USERNAME=robot
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN groupadd --gid $USER_GID $USERNAME && \
+    useradd --create-home --no-log-init --uid $USER_UID --gid $USER_GID $USERNAME
+
+ENV HOME_PATH=/home/$USERNAME
+USER $USERNAME
+RUN conda init bash
+
+
+FROM base as branch-root
+
+ARG USERNAME=root
+ENV HOME_PATH=/root
+
+
+FROM branch-${MODE} AS final
+
+WORKDIR $HOME_PATH/.mujoco
+RUN curl -LJO https://www.roboti.us/download/mjpro150_linux.zip && \
+    unzip mjpro150_linux.zip && \
+    rm mjpro150_linux.zip && \
+    curl -LJO https://www.roboti.us/file/mjkey.txt
+
+RUN echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME_PATH/.mujoco/mjpro150/bin" >> $HOME_PATH/.bashrc
+
+WORKDIR $HOME_PATH
+
+ARG USERNAME=root
+
+COPY --chown=$USERNAME environment.yml ./
+RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME_PATH/.mujoco/mjpro150/bin && \
+    conda env create -f environment.yml && \
+    echo "conda activate hra" >> $HOME_PATH/.bashrc
+
+SHELL ["/bin/bash", "-c"]
+
+ENTRYPOINT cd hybrid-reward-architecture && \
+    conda run --no-capture-output -n hra pip install -e . && \
+    /bin/bash

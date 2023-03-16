@@ -91,7 +91,7 @@ def get_info_keys_by_env_str(env_str: str) -> list:
             "reward_alive",
             "reward_impact",
         ]
-    elif env_str == "Halfcheetah-v3" or env_str == "hrahalfcheetah":
+    elif env_str == "HalfCheetah-v3" or env_str == "HRAHalfCheetah":
         return [
             "reward_run",
             "reward_ctrl"
