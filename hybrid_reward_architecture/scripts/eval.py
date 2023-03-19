@@ -7,7 +7,7 @@ from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3 import SAC, TD3
 
-from hybrid_reward_architecture import model_save_path
+from hybrid_reward_architecture import MODEL_SAVE_PATH
 from hybrid_reward_architecture.algos import HRASAC, HRATD3
 
 import hybrid_reward_architecture.envs  # noqa: F401
@@ -20,16 +20,18 @@ def eval(
     n_episodes: int = 10,
 ):
     env = gym.make(env_id)
-    model = Algorithm.load(f"{model_save_path}/{key}/model.zip", env=env)
+    model = Algorithm.load(f"{MODEL_SAVE_PATH}/{key}/model.zip", env=env)
 
     assert env is not None, "No environment stored with model"
 
-    evaluate_policy(
+    rew, lenghts = evaluate_policy(
         model=model,
         env=env,
         n_eval_episodes=n_episodes,
         render=True,
     )
+
+    print(f"Average reward: {rew}")
 
 
 def get_algorithm_by_str(algo_str: str) -> Optional[Type[OffPolicyAlgorithm]]:

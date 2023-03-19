@@ -1,13 +1,13 @@
 from wandb.integration.sb3 import WandbCallback
 from stable_baselines3.common.utils import safe_mean
-from hybrid_reward_architecture import model_save_path
+from hybrid_reward_architecture import MODEL_SAVE_PATH
 
 
 class LogCallback(WandbCallback):
     def __init__(self, run, info_keywords=None):
         super().__init__(
             gradient_save_freq=100,
-            model_save_path=f"{model_save_path}/{run.id}",
+            model_save_path=f"{MODEL_SAVE_PATH}/{run.id}",
             verbose=2
         )
         if info_keywords is None:
