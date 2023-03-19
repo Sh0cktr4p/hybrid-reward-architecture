@@ -131,3 +131,5 @@ dmypy.json
 models/
 runs/
 wandb/
+
+*.out
