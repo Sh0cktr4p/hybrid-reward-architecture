@@ -14,6 +14,26 @@ register(
 )
 
 register(
+    id="HRAHopper-v3",
+    entry_point="hybrid_reward_architecture.envs.hra_hopper:HRAHopper",
+    max_episode_steps=1000,
+    reward_threshold=3800.0,
+)
+
+register(
+    id="HRASwimmer-v3",
+    entry_point="hybrid_reward_architecture.envs.hra_swimmer:HRASwimmer",
+    max_episode_steps=1000,
+    reward_threshold=360.0,
+)
+
+register(
+    id="HRAWalker2d-v3",
+    entry_point="hybrid_reward_architecture.envs.hra_walker2d:HRAWalker2d",
+    max_episode_steps=1000,
+)
+
+register(
     id="HRAAnt-v3",
     entry_point="hybrid_reward_architecture.envs.hra_ant:HRAAnt",
     max_episode_steps=1000,
