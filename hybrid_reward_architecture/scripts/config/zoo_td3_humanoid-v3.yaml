@@ -1,0 +1,13 @@
+defaults:
+  - algorithm: TD3
+  - environment: Humanoid-v3
+  - run: default
+  - wandb_run: default
+
+algorithm:
+  train_freq: 1
+  gradient_steps: 1
+  learning_rate: 3e-4
+  batch_size: 256
+run:
+  n_steps: 2_000_000

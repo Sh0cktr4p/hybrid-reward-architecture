@@ -1,0 +1,13 @@
+defaults:
+  - algorithm: TD3
+  - environment: HalfCheetah-v3
+  - run: default
+  - wandb_run: default
+
+algorithm:
+  verbose: 1
+  learning_starts: 10_000
+  noise_type: normal
+  noise_std: 0.1
+run:
+  n_steps: 1_000_000

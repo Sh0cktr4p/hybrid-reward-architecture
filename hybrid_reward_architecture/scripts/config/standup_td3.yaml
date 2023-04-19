@@ -1,6 +1,6 @@
 defaults:
-  - algorithm: td3
-  - environment: humanoid_standup-v2
+  - algorithm: TD3
+  - environment: HumanoidStandup-v2
   - run: default
   - wandb_run: default
 
