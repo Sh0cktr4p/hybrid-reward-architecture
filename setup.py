@@ -7,5 +7,6 @@ setup(
     install_requires=[
         "gym[all]==0.21.0",
         "stable-baselines3==1.7.0",
+        "hydra-core==1.3.2",
     ]
 )

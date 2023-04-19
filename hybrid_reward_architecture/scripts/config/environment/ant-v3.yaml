@@ -1,0 +1,6 @@
+id: Ant-v3
+info_keys:
+  - reward_forward
+  - reward_ctrl
+  - reward_contact
+  - reward_survive

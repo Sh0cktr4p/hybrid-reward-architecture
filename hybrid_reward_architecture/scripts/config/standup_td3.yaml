@@ -1,0 +1,8 @@
+defaults:
+  - algorithm: td3
+  - environment: humanoid_standup-v2
+  - run: default
+  - wandb_run: default
+
+algorithm:
+  verbose: 1

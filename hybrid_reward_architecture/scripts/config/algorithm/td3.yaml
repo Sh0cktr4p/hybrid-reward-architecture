@@ -1,0 +1,5 @@
+id: TD3
+policy: MlpPolicy
+train_freq:
+  - 100
+  - step

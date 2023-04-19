@@ -1,0 +1,6 @@
+id: Humanoid-v3
+info_keys:
+  - reward_linvel
+  - reward_quadctrl
+  - reward_alive
+  - reward_impact

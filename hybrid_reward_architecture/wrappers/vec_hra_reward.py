@@ -8,6 +8,11 @@ class VecHRAReward(VecEnvWrapper):
         return self.venv.reset()
 
     def step_wait(self):
-        obss, _, dones, infos = self.venv.step_wait()
-        hra_rews = np.array([info["hra_rew"] for info in infos])
+        obss, rews, dones, infos = self.venv.step_wait()
+        hra_rews = np.array(
+            [
+                info["hra_rew"] if "hra_rew" in info else [rews[idx]]
+                for idx, info in enumerate(infos)
+            ]
+        )
         return obss, hra_rews, dones, infos

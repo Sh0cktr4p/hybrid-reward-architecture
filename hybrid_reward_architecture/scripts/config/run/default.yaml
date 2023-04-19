@@ -1,0 +1,11 @@
+n_steps: 1_000_000
+n_envs: 6
+type: debug
+id: null
+load_episode: null
+info_keys: ${environment.info_keys}
+verbose: True
+save_freq: 5000
+grad_save_freq: 100
+seed: null
+eval_seed: 0

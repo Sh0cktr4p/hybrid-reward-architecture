@@ -1,0 +1,5 @@
+id: HumanoidStandup-v2
+info_keys:
+  - reward_linup
+  - reward_quadctrl
+  - reward_impact

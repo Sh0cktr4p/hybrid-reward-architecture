@@ -1,0 +1,4 @@
+id: HalfCheetah-v3
+info_keys:
+  - reward_run
+  - reward_ctrl

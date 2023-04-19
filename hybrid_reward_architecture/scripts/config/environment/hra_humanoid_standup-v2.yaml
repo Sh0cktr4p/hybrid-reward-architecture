@@ -1,0 +1,4 @@
+defaults:
+  - humanoid_standup-v2
+
+id: HRAHumanoidStandup-v2
