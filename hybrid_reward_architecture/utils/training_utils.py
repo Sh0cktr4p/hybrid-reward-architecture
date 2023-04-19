@@ -292,7 +292,7 @@ def run_training_wandb(config: DictConfig) -> BaseAlgorithm:
         model = get_model(config=config, env=env, run_id=run.id, save_logs=True)
         callback = LogCallback(
             info_keywords=config.run.info_keys,
-            model_save_path=f"{MODEL_SAVE_PATH}/{run.id}/model",
+            model_save_path=f"{MODEL_SAVE_PATH}/{run.id}",
             model_save_freq=config.run.save_freq,
             gradient_save_freq=config.run.grad_save_freq,
             verbose=config.run.verbose,
